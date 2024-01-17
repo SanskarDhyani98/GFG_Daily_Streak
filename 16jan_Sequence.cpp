@@ -37,20 +37,32 @@ using namespace std;
 
 class Solution{
 public:
-    int numberSequence(int m, int n){
-        // code here
-        vector<vector<int>> dp(n,vector<int>(m+1,0));
-        for(int i=1;i<=m;i++)
-        {  dp[n-1][i]=1;    //base case
-        }
-            for(int i=n-2;i>=0;i--)
-            {
-                for(int j=1;j<=m;j++)
-                {
-                    for(int k=2*j;k<=m;k++)
-                    dp[i][j]+=dp[i+1][k];
-                }
-            }
-            return accumulate(dp[0].begin(),dp[0].end(),0);
+ int help(int i, int j, int n, int m){
+        if(j==n)    return 1;
+        if(i>m)     return 0;
+        
+        int pick= help(i*2, j+1, n, m);
+        int not_pick=help(i+1, j, n, m);
+
+        return pick+not_pick;
     }
+    int numberSequence(int m, int n){
+        return help(1,0,n,m);
+    }
+    // int numberSequence(int m, int n){
+    //     // code here
+    //     vector<vector<int>> dp(n,vector<int>(m+1,0));
+    //     for(int i=1;i<=m;i++)
+    //     {  dp[n-1][i]=1;    //base case
+    //     }
+    //         for(int i=n-2;i>=0;i--)
+    //         {
+    //             for(int j=1;j<=m;j++)
+    //             {
+    //                 for(int k=2*j;k<=m;k++)
+    //                 dp[i][j]+=dp[i+1][k];
+    //             }
+    //         }
+    //         return accumulate(dp[0].begin(),dp[0].end(),0);
+    // }
 };
