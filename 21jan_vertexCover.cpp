@@ -59,9 +59,7 @@ class Solution{
         return 0;
         }
         int vertexCover(int n, vector<pair<int, int>> &edges) {
-               
-                
-                
+       
         int low = 0;
         int high = n;
         
